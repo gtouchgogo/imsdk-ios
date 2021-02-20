@@ -102,6 +102,51 @@ In the source files where you need to use the library, import the umbrella heade
 At this point your workspace should build without error. If you are having problem, post to the Issue and the
 community can help you solve it.
 
+### Customized Building Guide
++ Clone Github projects.
+```
+git clone https://github.com/startalkIM/QIMReactNativeLibrary.git &&
+git clone https://github.com/startalkIM/imsdk-ios.git &&
+git clone https://github.com/startalkIM/libqimuikit-ios.git &&
+git clone https://github.com/startalkIM/libqimgeneralmodule-ios.git &&
+git clone https://github.com/startalkIM/libqimcommon-ios.git &&
+git clone https://github.com/startalkIM/libqimkitvendor-ios.git &&
+git clone https://github.com/startalkIM/libqimdatabase-ios.git &&
+git clone https://github.com/startalkIM/libqimcommoncategories-ios.git
+```
+
++ Edit Podfile in imsdk-ios/Podfile
+```
+ change enviroment variable
+	$debug = "true"
+ fix path
+    pod 'QIMUIKit', path: '../libqimuikit-ios'
+    pod 'QIMGeneralModule', path: '../libqimgeneralmodule-ios'
+    pod 'QIMCommon', path: '../libqimcommon-ios'
+    pod 'QIMKitVendor', path: '../libqimkitvendor-ios'
+    pod 'QIMDataBase', path: '../libqimdatabase-ios'
+    pod 'QIMCommonCategories', path: '../libqimcommoncategories-ios'
+    pod 'QIMReactNativeLibrary', path: '../QIMReactNativeLibrary'
+```
+
++ Edit PodSpec file in imsdk-ios/libqimuikit-ios/ in line 247
+```
+ comment unrelevant dependencies
+	# s.dependency 'RTLabel'
+```
+
++ Excute pod install
+```
+pod install
+```
+
++ Add RTLabel in compile source
+
+ **Build Phases** -> **Compile Sources** ->  **"+"** -> select RTLabel.m in imsdk-ios/RTLabel.m
+
++ Build && Run project in XCode.
+
+
 Feedback
 =====
 -   app@startalk.im（Email）
